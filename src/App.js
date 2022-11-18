@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import numArray from './utils/redumnum'
 function App() {
+  var deleteArr = [] 
+  const onClick = (e) => {
+    deleteArr.push(e.target)
+    if(deleteArr.length >= 2 ){
+      if(deleteArr[0].innerHTML === deleteArr[1].innerHTML){
+        e.target.innerHTML = ''
+        deleteArr[0].innerHTML =''
+      }
+      deleteArr = []
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" onClick={onClick}>
+      {
+        numArray.map((item)=>{
+          return <Task id={item}/>
+        })
+      }
     </div>
   );
+}
+function Task(props){
+  // console.log(props);
+  return (
+    <div className={'Task'}>{props.id}</div>
+  )
 }
 
 export default App;
